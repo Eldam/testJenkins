@@ -4,23 +4,23 @@ import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
 import es.uvigo.esei.daa.entities.Person;
-import es.uvigo.esei.daa.entities.User;
 
-public class IsEqualToUser extends IsEqualToEntity<User> {
-	public IsEqualToUser(User entity) {
+public class IsEqualToPerson extends IsEqualToEntity<Person> {
+	public IsEqualToPerson(Person entity) {
 		super(entity);
 	}
 
 	@Override
-	protected boolean matchesSafely(User actual) {
+	protected boolean matchesSafely(Person actual) {
 		this.clearDescribeTo();
 		
 		if (actual == null) {
 			this.addTemplatedDescription("actual", expected.toString());
 			return false;
 		} else {
-			return checkAttribute("login", User::getLogin, actual)
-				&& checkAttribute("password", User::getPassword, actual);
+			return checkAttribute("id", Person::getId, actual)
+				&& checkAttribute("name", Person::getName, actual)
+				&& checkAttribute("surname", Person::getSurname, actual);
 		}
 	}
 
@@ -28,29 +28,29 @@ public class IsEqualToUser extends IsEqualToEntity<User> {
 	 * Factory method that creates a new {@link IsEqualToEntity} matcher with
 	 * the provided {@link Person} as the expected value.
 	 * 
-	 * @param user the expected person.
+	 * @param person the expected person.
 	 * @return a new {@link IsEqualToEntity} matcher with the provided
 	 * {@link Person} as the expected value.
 	 */
 	@Factory
-	public static IsEqualToUser equalsToUser(User user) {
-		return new IsEqualToUser(user);
+	public static IsEqualToPerson equalsToPerson(Person person) {
+		return new IsEqualToPerson(person);
 	}
 	
 	/**
 	 * Factory method that returns a new {@link Matcher} that includes several
-	 * {@link IsEqualToUser} matchers, each one using an {@link Person} of the
+	 * {@link IsEqualToPerson} matchers, each one using an {@link Person} of the
 	 * provided ones as the expected value.
 	 * 
-	 * @param users the persons to be used as the expected values.
+	 * @param persons the persons to be used as the expected values.
 	 * @return a new {@link Matcher} that includes several
-	 * {@link IsEqualToUser} matchers, each one using an {@link Person} of the
+	 * {@link IsEqualToPerson} matchers, each one using an {@link Person} of the
 	 * provided ones as the expected value.
 	 * @see IsEqualToEntity#containsEntityInAnyOrder(java.util.function.Function, Object...)
 	 */
 	@Factory
-	public static Matcher<Iterable<? extends User>> containsPeopleInAnyOrder(User ... users) {
-		return containsEntityInAnyOrder(IsEqualToUser::equalsToUser, users);
+	public static Matcher<Iterable<? extends Person>> containsPeopleInAnyOrder(Person ... persons) {
+		return containsEntityInAnyOrder(IsEqualToPerson::equalsToPerson, persons);
 	}
 
 }

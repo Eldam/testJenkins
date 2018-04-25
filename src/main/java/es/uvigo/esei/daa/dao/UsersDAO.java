@@ -20,7 +20,7 @@ public class UsersDAO extends DAO {
 	private final static Logger LOG = Logger.getLogger(UsersDAO.class.getName());
 	
 	// Yes, SALT should come from external configuration (for example, a property in Tomcat's context).
-	private final static String SALT = "letta-";
+	private final static String SALT = "daaexample-";
 	
 	/**
 	 * Returns a user stored persisted in the system.
@@ -33,7 +33,7 @@ public class UsersDAO extends DAO {
 	 */
 	public User get(String login) throws DAOException {
 		try (final Connection conn = this.getConnection()) {
-			final String query = "SELECT * FROM user WHERE login=?";
+			final String query = "SELECT * FROM users WHERE login=?";
 			
 			try (final PreparedStatement statement = conn.prepareStatement(query)) {
 				statement.setString(1, login);
@@ -102,13 +102,8 @@ public class UsersDAO extends DAO {
 
 	private User rowToEntity(ResultSet result) throws SQLException {
 		return new User(
-			result.getInt("id"),
 			result.getString("login"),
-			result.getString("password"),
-			result.getString("name"),
-			result.getString("surname"),
-			result.getString("email"),
-			result.getDate("inscription_date")
+			result.getString("password")
 		);
 	}
 }

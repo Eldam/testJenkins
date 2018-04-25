@@ -33,11 +33,9 @@ import es.uvigo.esei.daa.dao.UsersDAO;
 @WebFilter(urlPatterns = "/*")
 public class LoginFilter implements Filter {
 	private static final String LOGOUT_PATH = "/logout";
-	private static final String LOGIN_PATH = "/login";
 	private static final String REST_PATH = "/rest";
 	private static final String[] PUBLIC_PATHS = new String[] {
-		"/index.html", "/favicon.ico", "/inline.bundle.js", "/main.bundle.js", "/polyfills.bundle.js",
-		"/styles.bundle.js", "/vendor.bundle.js", "/rest"// Add the paths that can be publicly accessed (e.g. /images...)
+		"/index.html", "/js", "/css" // Add the paths that can be publicly accessed (e.g. /images...)
 	};
 
 	@Override
@@ -54,14 +52,10 @@ public class LoginFilter implements Filter {
 				destroySession(httpRequest);
 				removeTokenCookie(httpRequest, httpResponse);
 				redirectToIndex(httpRequest, httpResponse);
-			} else if (checkLogin(httpRequest, httpResponse)) {
-				if (isLoginPath(httpRequest)) {
-					httpResponse.setStatus(HttpServletResponse.SC_NO_CONTENT);
-				} else {
-					continueWithRedirect(httpRequest, httpResponse);
-				}
 			} else if (isPublicPath(httpRequest) || checkToken(httpRequest)) {
 				chain.doFilter(request, response);
+			} else if (checkLogin(httpRequest, httpResponse)) {
+				continueWithRedirect(httpRequest, httpResponse);
 			} else if (isRestPath(httpRequest)) {
 				destroySession(httpRequest);
 				httpResponse.sendError(HttpServletResponse.SC_FORBIDDEN);
@@ -74,10 +68,6 @@ public class LoginFilter implements Filter {
 		} catch (DAOException e) {
 			httpResponse.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		}
-	}
-
-	private boolean isLoginPath(HttpServletRequest httpRequest) {
-		return httpRequest.getServletPath().equals(LOGIN_PATH);
 	}
 
 	@Override
@@ -94,7 +84,6 @@ public class LoginFilter implements Filter {
 	
 	private boolean isPublicPath(HttpServletRequest request) {
 		for (String path : PUBLIC_PATHS) {
-
 			if (request.getServletPath().startsWith(path))
 				return true;
 		}
@@ -132,7 +121,6 @@ public class LoginFilter implements Filter {
 		if (cookie != null) {
 			cookie.setMaxAge(0);
 			response.addCookie(cookie);
-			
 		}
 	}
 	

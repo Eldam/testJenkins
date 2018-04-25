@@ -2,9 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>es.uvigo.esei.daa</groupId>
-	<artifactId>LETTA</artifactId>
+	<artifactId>example</artifactId>
 	<packaging>war</packaging>
 	<version>0.1.8</version>
+	<name>DAA Example</name>
 
 	<licenses>
 		<license>
@@ -46,8 +47,6 @@
 		<equalsverifier.version>2.4.2</equalsverifier.version>
 
 		<!-- Plugins -->
-		<exec-maven-plugin.version>1.6.0</exec-maven-plugin.version>
-		<maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
 		<maven-failsafe-plugin.version>2.20.1</maven-failsafe-plugin.version>
 		<maven-surefire-plugin.version>2.20.1</maven-surefire-plugin.version>
 		<maven-surefire-report-plugin.version>2.20.1</maven-surefire-report-plugin.version>
@@ -185,78 +184,17 @@
 	</dependencies>
 
 	<build>
-		<finalName>LETTA</finalName>
+		<finalName>DAAExample</finalName>
 
 		<plugins>
-		    <plugin>
-		        <groupId>org.apache.maven.plugins</groupId>
-		        <artifactId>maven-compiler-plugin</artifactId>
-		        <version>${maven-compiler-plugin.version}</version>
-		        <configuration>
-		            <excludes>
-		                <exclude>ngapp/**</exclude>
-		            </excludes>
-		        </configuration>
-		    </plugin>
-		    
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
 				<groupId>org.apache.maven.plugins</groupId>
 				<version>${maven-war-plugin.version}</version>
 				<configuration>
 					<warName>${project.finalName}</warName>
-		            <excludes>
-		                <exclude>ngapp/**</exclude>
-		            </excludes>
-		            <webappDirectory>${war.webapp.directory}</webappDirectory>
-		            <webResources>
-		            	<webResource>
-		            		<directory>${project.basedir}/src/main/webapp</directory>
-		            	</webResource>
-		            	<webResource>
-		            		<directory>${project.basedir}/src/main/ngapp/dist</directory>
-		            	</webResource>
-		            </webResources>
 				</configuration>
 			</plugin>
-			
-		    <plugin>
-		        <groupId>org.codehaus.mojo</groupId>
-		        <artifactId>exec-maven-plugin</artifactId>
-		        <version>${exec-maven-plugin.version}</version>
-		        <executions>
-		            <execution>
-		                <id>exec-npm-install</id>
-		                <phase>generate-sources</phase>
-		                <configuration>
-		                	<skip>${skip-npm-install}</skip>
-		                    <workingDirectory>${project.basedir}/src/main/ngapp</workingDirectory>
-		                    <executable>npm</executable>
-		                    <arguments>
-		                        <argument>install</argument>
-		                    </arguments>
-		                </configuration>
-		                <goals>
-		                    <goal>exec</goal>
-		                </goals>
-		            </execution>
-		            <execution>
-		                <id>exec-npm-ng-build</id>
-		                <phase>generate-sources</phase>
-		                <configuration>
-		                    <workingDirectory>${project.basedir}/src/main/ngapp</workingDirectory>
-		                    <executable>ng</executable>
-		                    <arguments>
-		                        <argument>build</argument>
-		                        <argument>--base-href=.</argument>
-		                    </arguments>
-		                </configuration>
-		                <goals>
-		                    <goal>exec</goal>
-		                </goals>
-		            </execution>
-		        </executions>
-		    </plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -521,7 +459,7 @@
 										-Drunmode=TEST</cargo.jvmargs>
 									<cargo.servlet.port>9080</cargo.servlet.port>
 									<cargo.datasource.datasource.h2>
-										cargo.datasource.jndi=jdbc/letta|
+										cargo.datasource.jndi=jdbc/daaexample|
 										cargo.datasource.driver=org.hsqldb.jdbc.JDBCDriver|
 										cargo.datasource.url=jdbc:hsqldb:hsql://localhost/daatestdb|
 										cargo.datasource.username=sa|
@@ -572,9 +510,6 @@
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
-			<properties>
-				<skip-npm-install>true</skip-npm-install>
-			</properties>
 
 			<build>
 				<plugins>
@@ -587,10 +522,6 @@
 							<watches>
 								<watch>
 									<directory>src/main</directory>
-									<excludes>
-										<exclude>src/main/ngapp/node_modules</exclude>
-										<exclude>src/main/ngapp/dist</exclude>
-									</excludes>
 								</watch>
 							</watches>
 							<goals>
@@ -624,16 +555,16 @@
 								<home>${project.build.directory}/catalina-base</home>
 								<properties>
 									<cargo.servlet.port>9080</cargo.servlet.port>
-									<cargo.datasource.datasource.h2><![CDATA[
-										cargo.datasource.jndi=jdbc/letta|
+									<cargo.datasource.datasource.h2>
+										cargo.datasource.jndi=jdbc/daaexample|
 										cargo.datasource.driver=com.mysql.jdbc.Driver|
-										cargo.datasource.url=jdbc:mysql://localhost/letta?useSSL=false|
+										cargo.datasource.url=jdbc:mysql://localhost/daaexample|
 										cargo.datasource.username=daa|
 										cargo.datasource.password=daa|
 										cargo.datasource.maxActive=8|
 										cargo.datasource.maxIdle=4|
 										cargo.datasource.maxWait=10000
-									]]></cargo.datasource.datasource.h2>
+									</cargo.datasource.datasource.h2>
 								</properties>
 							</configuration>
 						</configuration>
@@ -823,5 +754,4 @@
 			</build>
 		</profile>
 	</profiles>
-	<name>LETTA</name>
 </project>

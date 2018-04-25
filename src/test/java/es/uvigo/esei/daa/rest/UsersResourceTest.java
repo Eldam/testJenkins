@@ -36,7 +36,7 @@ import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
 
-import es.uvigo.esei.daa.LETTAApplication;
+import es.uvigo.esei.daa.DAAExampleApplication;
 import es.uvigo.esei.daa.LoginFilter;
 import es.uvigo.esei.daa.entities.User;
 import es.uvigo.esei.daa.listeners.ApplicationContextBinding;
@@ -52,7 +52,7 @@ import es.uvigo.esei.daa.listeners.DbManagementTestExecutionListener;
 	ApplicationContextJndiBindingTestExecutionListener.class
 })
 @ApplicationContextBinding(
-	jndiUrl = "java:/comp/env/jdbc/letta",
+	jndiUrl = "java:/comp/env/jdbc/daaexample",
 	type = DataSource.class
 )
 @DbManagement(
@@ -64,7 +64,7 @@ import es.uvigo.esei.daa.listeners.DbManagementTestExecutionListener;
 public class UsersResourceTest extends JerseyTest {
 	@Override
 	protected Application configure() {
-		return new LETTAApplication();
+		return new DAAExampleApplication();
 	}
 
 	@Override
@@ -101,7 +101,7 @@ public class UsersResourceTest extends JerseyTest {
 		assertThat(response, hasOkStatus());
 		
 		final User user = response.readEntity(User.class);
-		System.out.println(">> " + user.getInscriptionDate() + " - " + user(admin).getInscriptionDate());
+		
 		assertThat(user, is(equalsToUser(user(admin))));
 	}
 	
@@ -130,6 +130,7 @@ public class UsersResourceTest extends JerseyTest {
 		assertThat(response, hasOkStatus());
 		
 		final User user = response.readEntity(User.class);
+		
 		assertThat(user, is(equalsToUser(user(login))));
 	}
 	

@@ -17,9 +17,7 @@ import es.uvigo.esei.daa.dao.UsersDAO;
 /**
  * REST resource for managing users.
  * 
- * @author Marco Aurelio Paz González.
- * @author Jose Eugenio González Fernández
- * 
+ * @author Miguel Reboiro Jato.
  */
 @Path("/users")
 @Produces(MediaType.APPLICATION_JSON)
