@@ -1,0 +1,33 @@
+
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo fixed-top scrolling-navbar">
+           
+  <!-- Navbar brand -->
+  <logo><a class="navbar-brand" routerLink="/"><img src="assets/imagenes/logo.png" height="30" class="d-inline-block align-top" alt=""></a></logo>
+
+  <!-- Collapsible content -->
+  <links>
+
+      <!-- Links -->
+      <ul class="navbar-nav mr-auto">
+       
+        <li class="nav-item">
+            <a routerLink="/index/filter" class="nav-link waves-light" mdbRippleRadius>Descubre Eventos</a>
+        </li>
+          <!-- Dropdown -->
+          
+      </ul>
+      <!--  Links -->
+      
+      <!-- Search form -->
+      <form class="form-inline  waves-light" mdbRippleRadius>
+            <input [value]="word" (input)="takeWord($event)" (click)="goSearch($event)" class="form-control mr-sm-2" type="text" placeholder="Search">
+      </form>
+    
+  </links>
+  <!-- Collapsible content -->
+
+
+</mdb-navbar>
+<!--/.Navbar-->
+          

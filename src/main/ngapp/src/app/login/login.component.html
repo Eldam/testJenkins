@@ -1,0 +1,25 @@
+
+<section class="login-padd container">
+  
+  <div class="col marg-auto align-self-center col-md-4">
+    <form (ngSubmit)="ngSubmit()" class="form-signin">
+        <h1 class="text-center">LETTA</h1>
+      <h1 class="h3 text-center mb-3 font-weight-normal">Please sign in</h1>
+      <div class="md-form">
+        <input [(ngModel)]="model.login" #login="ngModel" id="login" name="login" type="text" class="form-control" mdbActive>
+        <label for="login">Your username</label>
+      </div>
+
+      <div class="md-form">
+          <input [(ngModel)]="model.pass" #pass="ngModel" id="pass" name="pass" type="password" class="form-control" mdbActive>
+          <label for="pass">Your password</label>
+      </div>
+      <div class="alert" *ngIf="alert">
+        <h6>El usuario o contraseña son incorrectos</h6>
+      </div>
+      <button type="submit" class="text-center marg-auto btn btn-indigo waves-light"mdbRippleRadius>Sign in</button>
+      
+      
+    </form>
+  </div>
+</section>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <mkdir dir="${settings.localRepository}/geckodriver/Linux/amd64//home/osboxes/letta/target/"/>
+  <get skipexisting="true" src="https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-linux64.tar.gz" dest="${settings.localRepository}/geckodriver/Linux/amd64//home/osboxes/letta/target//geckodriver-v0.19.1-linux64.tar.gz"/>
+  <untar src="${settings.localRepository}/geckodriver/Linux/amd64//home/osboxes/letta/target//geckodriver-v0.19.1-linux64.tar.gz" dest="${settings.localRepository}/geckodriver/Linux/amd64//home/osboxes/letta/target/" compression="gzip"/>
+  <chmod file="${settings.localRepository}/geckodriver/Linux/amd64//home/osboxes/letta/target//geckodriver" perm="a+x"/>
+</target>
+</project>

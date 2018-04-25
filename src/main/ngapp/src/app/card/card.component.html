@@ -1,0 +1,27 @@
+<!--Card-->
+<div (click)="showDetail()" style="max-height: 355px;min-height: 355px;margin-top:31px;" class="card card-cascade wider margin-bot">
+
+    <!--Card image-->
+    <div class="card-bea view overlay hm-white-slight waves-light" mdbRippleRadius>
+        <img [src]="categories[event.category]" class="img-fluid">
+        <a>
+            <div class="mask"></div>
+        </a>
+    </div>
+    <!--/Card image-->
+
+    <!--Card content-->
+    <div class="card-body text-center">
+        <!--Title-->
+        <h4 class="card-title">
+            {{event.name}}
+        </h4>
+
+        <p class="card-text">{{description}}
+        </p>
+
+    </div>
+    <!--/.Card content-->
+
+</div>
+<!--/.Card-->

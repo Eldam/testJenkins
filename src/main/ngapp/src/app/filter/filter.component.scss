@@ -1,0 +1,25 @@
+.filters{
+    display: flex;
+    padding: 30px 0px 30px 0px;
+    justify-content: space-between;
+}
+
+.filter-category{
+    max-width: 75%;
+    padding: 0px 20px 0px 20px;
+}
+.filter-date{
+    max-width: 25%;
+    display: flex;
+    align-items: baseline;
+}
+
+@media(max-width:1000px){
+    .filters{
+        display: flex;
+        flex-direction: column;
+    }
+    .filter-date{
+        padding: 15px;
+    }
+}
