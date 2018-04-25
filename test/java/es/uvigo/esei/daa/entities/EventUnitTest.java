@@ -57,7 +57,7 @@ public class EventUnitTest {
 
 	@Test(expected = NullPointerException.class)
 	public void testEventIntStringStringDateTimeStringIntStringNullName() {
-		new Event(1, null, "This is the description of the event", new Date(100), new Time(100),"Deportes", 777, "Puente Romano, Ourense");
+		new Event(1, "aaaa", "This is the description of the event", new Date(100), new Time(100),"Deportes", 777, "Puente Romano, Ourense");
 	}
 	
 	@Test(expected = NullPointerException.class)
