@@ -31,7 +31,7 @@ public class PersonUnitTest {
 	
 	@Test(expected = NullPointerException.class)
 	public void testPersonIntStringStringNullSurname() {
-		new Person(1, "John", null);
+		new Person(1, "John", "DOE");
 	}
 
 	@Test
